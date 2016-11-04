@@ -1,14 +1,22 @@
 package br.com.beblue.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String cpf;
+	private String userCpf;
 	private String name;
 	private Double balance;
 	
 	public User(String cpf, String name) {
-		this.cpf = cpf;
+		this.userCpf = cpf;
 		this.name = name;
 		this.balance = Double.valueOf(0.0);
 	}
@@ -17,16 +25,28 @@ public class User {
 		return id;
 	}
 	
-	public String getCpf() {
-		return cpf;
+	public String getUser_cpf() {
+		return userCpf;
+	}
+	
+	public void setUser_cpf(String cpf) {
+		this.userCpf = cpf;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public Double getBalance() {
 		return balance;
+	}
+	
+	public void setBalance(Double balance) {
+		this.balance = balance;
 	}
 
 	public void sacar(Double value) {
@@ -44,7 +64,7 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((userCpf == null) ? 0 : userCpf.hashCode());
 		return result;
 	}
 
@@ -57,12 +77,14 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
+		if (userCpf == null) {
+			if (other.userCpf != null)
 				return false;
-		} else if (!cpf.equals(other.cpf))
+		} else if (!userCpf.equals(other.userCpf))
 			return false;
 		return true;
 	}
+	
+	protected User() {}
 
 }
