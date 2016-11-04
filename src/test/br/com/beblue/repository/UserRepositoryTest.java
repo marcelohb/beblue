@@ -30,6 +30,7 @@ public class UserRepositoryTest {
 	public void setUp() {
 		restTemplate = new RestTemplate();
 		User[] users = restTemplate.getForObject("https://quarkbackend.com/getfile/vilibaldo-neto/json-javatest-users", User[].class);
+		repository.deleteAll();
 		for (User u : users) {
 			repository.save(u);
 		}

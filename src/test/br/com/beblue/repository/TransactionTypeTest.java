@@ -2,8 +2,6 @@ package br.com.beblue.repository;
 
 import static org.junit.Assert.assertEquals;
 
-import javax.transaction.Transactional;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +15,6 @@ import br.com.beblue.domain.TransactionType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
-@Transactional
 public class TransactionTypeTest {
 	
 	@Autowired
@@ -29,6 +26,7 @@ public class TransactionTypeTest {
 	public void setUp() {
 		restTemplate = new RestTemplate();
 		TransactionType[] types = restTemplate.getForObject("https://quarkbackend.com/getfile/vilibaldo-neto/json-javatest-transactiontypr", TransactionType[].class);
+		repository.deleteAll();
 		for (TransactionType t : types) {
 			repository.save(t);
 		}

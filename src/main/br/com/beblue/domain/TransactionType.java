@@ -40,6 +40,40 @@ public class TransactionType {
 		this.transactionName = transactionName;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((transactionName == null) ? 0 : transactionName.hashCode());
+		result = prime * result + ((transactionType == null) ? 0 : transactionType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TransactionType other = (TransactionType) obj;
+		if (id != other.id)
+			return false;
+		if (transactionName == null) {
+			if (other.transactionName != null)
+				return false;
+		} else if (!transactionName.equals(other.transactionName))
+			return false;
+		if (transactionType == null) {
+			if (other.transactionType != null)
+				return false;
+		} else if (!transactionType.equals(other.transactionType))
+			return false;
+		return true;
+	}
+
 	protected TransactionType() {}
 
 }
