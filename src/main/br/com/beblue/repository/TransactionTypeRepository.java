@@ -9,5 +9,7 @@ public interface TransactionTypeRepository extends CrudRepository<TransactionTyp
 	TransactionType findByTransactionType(String type);
 	
 	TransactionType findByTransactionName(String name);
+	
+	TransactionType findById(int id);
 
 }

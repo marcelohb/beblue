@@ -12,10 +12,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.beblue.Application;
 import br.com.beblue.domain.TransactionType;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = Application.class)
 @Transactional
 public class TransactionTypeTest {
 	
@@ -41,6 +42,13 @@ public class TransactionTypeTest {
 	@Test
 	public void findByType() {
 		TransactionType t = repository.findByTransactionType("TP_1");
+		assertEquals("TP_1", t.getTransaction_type());
+		assertEquals("CASHBACK", t.getTransaction_name());
+	}
+	
+	@Test
+	public void findById() {
+		TransactionType t = repository.findById(1);
 		assertEquals("TP_1", t.getTransaction_type());
 		assertEquals("CASHBACK", t.getTransaction_name());
 	}
