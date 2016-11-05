@@ -1,9 +1,12 @@
 package br.com.beblue.util;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.beblue.domain.TransactionType;
 import br.com.beblue.domain.User;
 import br.com.beblue.repository.TransactionTypeRepository;
 import br.com.beblue.repository.UserRepository;
@@ -12,20 +15,28 @@ import br.com.beblue.repository.UserRepository;
 public class PreLoad {
 	
 	@Autowired
-	private static UserRepository userRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
-	private static TransactionTypeRepository typeRepository; 
+	private TransactionTypeRepository typeRepository;
 	
-	private static RestTemplate restTemplate;
+	private RestTemplate restTemplate;
 	
-	public static void preLoad() {
-//		restTemplate = new RestTemplate();
-//		User[] users = restTemplate.getForObject("https://quarkbackend.com/getfile/vilibaldo-neto/json-javatest-users", User[].class);
-//		userRepository.deleteAll();
-//		for (User u : users) {
-//			userRepository.save(u);
-//		}
+	@PostConstruct
+	public void preLoad() {
+		restTemplate = new RestTemplate();
+		User[] users = restTemplate.getForObject("https://quarkbackend.com/getfile/vilibaldo-neto/json-javatest-users", User[].class);
+		userRepository.deleteAll();
+		for (User u : users) {
+			userRepository.save(u);
+		}
+		
+		restTemplate = new RestTemplate();
+		TransactionType[] types = restTemplate.getForObject("https://quarkbackend.com/getfile/vilibaldo-neto/json-javatest-transactiontypr", TransactionType[].class);
+		typeRepository.deleteAll();
+		for (TransactionType t : types) {
+			typeRepository.save(t);
+		}
 	}
 
 }

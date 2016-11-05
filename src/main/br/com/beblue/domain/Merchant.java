@@ -11,16 +11,17 @@ public class Merchant {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	
 	private String name;
 	
 	public Merchant(String name) {
 		this.name = name;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}

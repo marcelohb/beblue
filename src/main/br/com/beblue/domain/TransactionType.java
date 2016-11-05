@@ -24,6 +24,14 @@ public class TransactionType {
 		transactionName = name;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getTransaction_type() {
 		return transactionType;
 	}

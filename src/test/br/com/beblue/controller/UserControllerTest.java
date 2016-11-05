@@ -5,57 +5,48 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.WebApplicationContext;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
-@WebAppConfiguration
-public class UserControllerTest {
-	
-	protected WebApplicationContext context;
-	
-	protected RestTemplate restTemplate;
-	
-	protected MockMvc mockMvc;
+import br.com.beblue.AbstractTU;
+
+public class UserControllerTest extends AbstractTU {
 	
 	@Before
 	public void setUp() {
 		restTemplate = new RestTemplate();
-		mockMvc = MockMvcBuilders.webAppContextSetup(context)
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
 				.alwaysExpect(status().isOk())
-				.alwaysExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+				.alwaysExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.build();
 	}
 
 	@Test
 	public void readUser() {
 		String JSON = "[{" + 
+							"\"id\": 1," +
 							"\"user_cpf\": \"11111111111\"," +
 							"\"name\": \"João Primeiro\"," +
 							"\"balance\": 12" +
 						"}, {" +
+							"\"id\": 2," +
 							"\"user_cpf\": \"22222222222\"," +
 							"\"name\": \"Maria Segunda\"," +
 							"\"balance\": 52.02" +
 						"}, {" +
+							"\"id\": 3," +
 							"\"user_cpf\": \"33333333333\"," +
 							"\"name\": \"Emerson Terceiro\"," +
 							"\"balance\": 2.25" +
 						"}, {" +
+							"\"id\": 4," +
 							"\"user_cpf\": \"44444444444\"," +
 							"\"name\": \"Mario Quarto\"," +
 							"\"balance\": 89.66" +
 						"}]";
-		String response = restTemplate.getForObject("localhost://beblue:8080/users", String.class);
+		String response = restTemplate.getForObject("http://localhost:8080/users", String.class);
 		
 		JSONAssert.assertEquals(JSON, response, true);
 	}

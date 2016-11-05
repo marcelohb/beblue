@@ -1,5 +1,6 @@
 package br.com.beblue.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,8 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@Column(unique=true)
 	private String userCpf;
 	private String name;
 	private Double balance;

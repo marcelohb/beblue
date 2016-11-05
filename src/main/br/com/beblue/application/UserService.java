@@ -12,10 +12,14 @@ import br.com.beblue.repository.UserRepository;
 public class UserService {
 	
 	@Autowired
-	UserRepository repository;
+	private UserRepository repository;
 	
 	public List<User> getAll() {
 		return (List<User>) repository.findAll();
+	}
+
+	public User findByCpf(String cpf) {
+		return repository.findByUserCpf(cpf);
 	}
 
 }
