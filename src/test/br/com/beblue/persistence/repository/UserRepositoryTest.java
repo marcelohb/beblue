@@ -1,4 +1,4 @@
-package br.com.beblue.repository;
+package br.com.beblue.persistence.repository;
 
 import static org.junit.Assert.assertEquals;
 

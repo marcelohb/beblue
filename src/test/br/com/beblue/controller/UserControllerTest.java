@@ -1,26 +1,35 @@
 package br.com.beblue.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.beblue.AbstractTU;
+import br.com.beblue.domain.User;
+import br.com.beblue.repository.UserRepository;
 
 public class UserControllerTest extends AbstractTU {
+	
+	@Autowired
+	private UserRepository repository;
 	
 	@Before
 	public void setUp() {
 		restTemplate = new RestTemplate();
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-				.alwaysExpect(status().isOk())
-				.alwaysExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.build();
+//		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
+//				.alwaysExpect(status().isOk())
+//				.alwaysExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+//				.build();
+	}
+	
+	@Test
+	public void findByCpf() {
+		User u = repository.findByUserCpf("11111111111");
+		assertEquals("11111111111", u.getUser_cpf());
 	}
 
 	@Test

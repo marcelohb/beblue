@@ -1,5 +1,8 @@
 package br.com.beblue.domain;
 
+import java.time.DayOfWeek;
+import java.util.HashMap;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +17,11 @@ public class Merchant {
 	
 	private String name;
 	
+	private HashMap<DayOfWeek, Double> cashbacks;
+	
 	public Merchant(String name) {
 		this.name = name;
+		cashbacks = new HashMap<>();
 	}
 
 	public int getId() {
@@ -33,7 +39,19 @@ public class Merchant {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public HashMap<DayOfWeek, Double> getCashbacks() {
+		return cashbacks;
+	}
+	
+	public void setCashbacks(HashMap<DayOfWeek, Double> cashbacks) {
+		this.cashbacks = cashbacks;
+	}
 
 	public Merchant() {}
+
+	public Double getCashBackFromString(String dayOfWeek) {
+		return getCashbacks().get(DayOfWeek.valueOf(dayOfWeek.toUpperCase()));
+	}
 
 }

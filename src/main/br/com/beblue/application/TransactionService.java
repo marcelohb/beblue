@@ -34,13 +34,13 @@ public class TransactionService {
 	
 	public void registrerTransaction(TransactionData transaction) {
 		log.info("Service....");
-		User user = userService.findByCpf(transaction.getUserCpf());
+		User user = userService.findByCpf(transaction.getUser_cpf());
 		log.info("User OK");
-		Merchant merchant = merchantService.findById(transaction.getMerchandId());
+		Merchant merchant = merchantService.findById(transaction.getMerchant_id());
 		log.info("Merchant OK");
-		TransactionType transactionType = type.findByType(transaction.getTransactionName());
+		TransactionType transactionType = type.findByType(transaction.getTransaction_type());
 		log.info("Type OK");
-		repository.save(new Transaction(user, merchant, transaction.getTransactionValue(), transactionType));
+		repository.save(new Transaction(user, merchant, transaction.getTransaction_value(), transactionType));
 		log.info("Saved");
 	}
 

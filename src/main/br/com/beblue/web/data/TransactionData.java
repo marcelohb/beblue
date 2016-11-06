@@ -3,47 +3,47 @@ package br.com.beblue.web.data;
 public class TransactionData {
 	
 	private String userCpf;
-	private int merchandId;
+	private int merchantId;
 	private Double transactionValue;
-	private String transactionName;
+	private String transactionType;
 	
-	public TransactionData(String userCpf, int merchandId, Double transactionValue, String transactionName) {
+	public TransactionData(String userCpf, int merchantId, Double transactionValue, String transactionType) {
 		this.userCpf = userCpf;
-		this.merchandId = merchandId;
+		this.merchantId = merchantId;
 		this.transactionValue = transactionValue;
-		this.transactionName = transactionName;
+		this.transactionType = transactionType;
 	}
 
-	public String getUserCpf() {
+	public String getUser_cpf() {
 		return userCpf;
 	}
 
-	public void setUserCpf(String userCpf) {
+	public void setUser_cpf(String userCpf) {
 		this.userCpf = userCpf;
 	}
 
-	public int getMerchandId() {
-		return merchandId;
+	public int getMerchant_id() {
+		return merchantId;
 	}
 
-	public void setMerchandId(int merchandId) {
-		this.merchandId = merchandId;
+	public void setMerchant_id(int merchantId) {
+		this.merchantId = merchantId;
 	}
 
-	public Double getTransactionValue() {
+	public Double getTransaction_value() {
 		return transactionValue;
 	}
 
-	public void setTransactionValue(Double transactionValue) {
+	public void setTransaction_value(Double transactionValue) {
 		this.transactionValue = transactionValue;
 	}
 
-	public String getTransactionName() {
-		return transactionName;
+	public String getTransaction_type() {
+		return transactionType;
 	}
 
-	public void setTransactionName(String transactionName) {
-		this.transactionName = transactionName;
+	public void setTransaction_type(String transactionType) {
+		this.transactionType = transactionType;
 	}
 	
 	public TransactionData() {}

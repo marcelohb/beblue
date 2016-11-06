@@ -1,4 +1,4 @@
-package br.com.beblue.repository;
+package br.com.beblue.persistence.repository;
 
 import static org.junit.Assert.*;
 
@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.beblue.Application;
 import br.com.beblue.domain.Merchant;
+import br.com.beblue.repository.MerchantRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)

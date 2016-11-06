@@ -2,7 +2,6 @@ package br.com.beblue.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
@@ -31,8 +30,10 @@ public class TransactionControllerTest extends AbstractTU {
 
 		mockMvc.perform(post("/register-transaction")
 				.content(t1)
-				.contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(jsonPath("$.success").value(true));
+				.accept(MediaType.APPLICATION_JSON_UTF8)
+//				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				)
+				.andExpect(status().isOk());
 	}
 
 }

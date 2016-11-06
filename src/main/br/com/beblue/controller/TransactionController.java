@@ -27,7 +27,7 @@ public class TransactionController {
 	@RequestMapping(value="/register-transaction", method = RequestMethod.POST)
 	@ResponseBody
 	public void registerTransaction(@RequestBody TransactionData transaction) {
-		log.info("Request for CPF: " + transaction.getUserCpf());
+		log.info("Request for CPF: " + transaction.getUser_cpf());
 		service.registrerTransaction(transaction);
 		log.info("Finished");
 	}

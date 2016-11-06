@@ -1,4 +1,4 @@
-package br.com.beblue.repository;
+package br.com.beblue.persistence.repository;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import br.com.beblue.Application;
 import br.com.beblue.domain.TransactionType;
+import br.com.beblue.repository.TransactionTypeRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)

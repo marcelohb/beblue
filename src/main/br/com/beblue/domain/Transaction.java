@@ -1,5 +1,8 @@
 package br.com.beblue.domain;
 
+import java.util.Date;
+import java.util.UUID;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,11 +35,15 @@ public class Transaction {
 	@JoinColumn(name="type", referencedColumnName="id")
 	private TransactionType type;
 	
+	private Date date;
+	
 	public Transaction(User user, Merchant merchant, Double transactionValue, TransactionType transactionType) {
 		this.user = user;
 		this.merchant = merchant;
 		this.transactionValue = transactionValue;
 		this.type = transactionType;
+		this.transactionId = new TransactionId(UUID.randomUUID());
+		this.date = new Date();
 	}
 
 	public Long getId() {
@@ -85,6 +92,14 @@ public class Transaction {
 
 	public void setType(TransactionType type) {
 		this.type = type;
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+	
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	public Transaction() {}

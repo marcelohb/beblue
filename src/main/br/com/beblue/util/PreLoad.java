@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.beblue.domain.Merchant;
 import br.com.beblue.domain.TransactionType;
 import br.com.beblue.domain.User;
+import br.com.beblue.repository.MerchantRepository;
 import br.com.beblue.repository.TransactionTypeRepository;
 import br.com.beblue.repository.UserRepository;
 
@@ -20,6 +22,9 @@ public class PreLoad {
 	@Autowired
 	private TransactionTypeRepository typeRepository;
 	
+	@Autowired
+	private MerchantRepository merchantRepository;
+	
 	private RestTemplate restTemplate;
 	
 	@PostConstruct
@@ -31,12 +36,14 @@ public class PreLoad {
 			userRepository.save(u);
 		}
 		
-		restTemplate = new RestTemplate();
 		TransactionType[] types = restTemplate.getForObject("https://quarkbackend.com/getfile/vilibaldo-neto/json-javatest-transactiontypr", TransactionType[].class);
 		typeRepository.deleteAll();
 		for (TransactionType t : types) {
 			typeRepository.save(t);
 		}
+		
+		Merchant m = new Merchant("Estabelecimento de Teste");
+		merchantRepository.save(m);
 	}
 
 }
