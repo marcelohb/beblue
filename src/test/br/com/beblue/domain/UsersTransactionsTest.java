@@ -22,7 +22,7 @@ public class UsersTransactionsTest {
 				new TransactionType("TP_1", "CASHBACK"));
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void registerTransactionCashBackSemSaldo() {
 		assertEquals("Merchant Test", t.getMerchant().getName());
 		assertEquals(Double.valueOf(10.0), t.getTransactionValue());
@@ -71,7 +71,7 @@ public class UsersTransactionsTest {
 		assertEquals(Double.valueOf(5.0), transactions.getUser(1).getBalance());
 	}
 	
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void registerTransactionUsarMaisQueSaldo() {
 		Transaction t2 = new Transaction(u, 
 				new Merchant("Merchant Test"), 

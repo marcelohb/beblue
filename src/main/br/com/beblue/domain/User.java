@@ -60,6 +60,7 @@ public class User {
 		balance -= value;
 		if (balance < 0d) {
 			balance = Double.valueOf(0.0);
+			throw new IllegalArgumentException("SALDO INSUFICIENTE");
 		}
 	}
 
