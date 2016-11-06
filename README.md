@@ -34,6 +34,7 @@
 	transaction_date: "2016-11-06 20:52:58.057",
 	transaction_type: "TP_3"
 }
+
 --
 
 * Teste #4:
