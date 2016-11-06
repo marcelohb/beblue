@@ -22,4 +22,8 @@ public class UserService {
 		return repository.findByUserCpf(cpf);
 	}
 
+	public void updateUser(User user) {
+		repository.save(user);
+	}
+
 }

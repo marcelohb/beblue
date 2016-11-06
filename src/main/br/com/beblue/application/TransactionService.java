@@ -1,13 +1,12 @@
 package br.com.beblue.application;
 
+import java.time.DayOfWeek;
+import java.util.HashMap;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.beblue.Application;
 import br.com.beblue.domain.Merchant;
 import br.com.beblue.domain.Transaction;
 import br.com.beblue.domain.TransactionType;
@@ -18,7 +17,8 @@ import br.com.beblue.web.data.TransactionData;
 @Service
 public class TransactionService {
 
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
+	private User user;
+	private Merchant merchant;
 	
 	@Autowired
 	private TransactionRepository repository;
@@ -32,20 +32,34 @@ public class TransactionService {
 	@Autowired
 	private TransactionTypeService type;
 	
+	@Autowired
+	private UsersTransactionsService usersTransaction;
+	
 	public void registrerTransaction(TransactionData transaction) {
-		log.info("Service....");
-		User user = userService.findByCpf(transaction.getUser_cpf());
-		log.info("User OK");
-		Merchant merchant = merchantService.findById(transaction.getMerchant_id());
-		log.info("Merchant OK");
+		user = userService.findByCpf(transaction.getUser_cpf());
+		merchant = merchantService.findById(transaction.getMerchant_id());
+		this.setCashbackMerchant();
 		TransactionType transactionType = type.findByType(transaction.getTransaction_type());
-		log.info("Type OK");
-		repository.save(new Transaction(user, merchant, transaction.getTransaction_value(), transactionType));
-		log.info("Saved");
+		Transaction t = new Transaction(user, merchant, transaction.getTransaction_value(), transactionType);
+		usersTransaction.registerTransaction(t, merchant);
+		repository.save(t);
+		userService.updateUser(user);
 	}
 
 	public List<Transaction> getAll() {
 		return repository.findAll();
+	}
+	
+	private void setCashbackMerchant() {
+		HashMap<DayOfWeek, Double> cashbacks = new HashMap<>();
+		cashbacks.put(DayOfWeek.SUNDAY, 5d);
+		cashbacks.put(DayOfWeek.MONDAY, 10d);
+		cashbacks.put(DayOfWeek.TUESDAY, 15d);
+		cashbacks.put(DayOfWeek.WEDNESDAY, 20d);
+		cashbacks.put(DayOfWeek.THURSDAY, 25d);
+		cashbacks.put(DayOfWeek.FRIDAY, 30d);
+		cashbacks.put(DayOfWeek.SATURDAY, 35d);
+		merchant.setCashbacks(cashbacks);
 	}
 
 }

@@ -19,7 +19,6 @@ public class TransactionIdTest {
 		TransactionId id1 = new TransactionId(UUID.randomUUID());
 		TransactionId id2 = new TransactionId(UUID.randomUUID());
 		assertNotEquals(id1.getIdTransaction(), id2.getIdTransaction());
-		
 	}
 
 }

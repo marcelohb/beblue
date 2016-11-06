@@ -17,17 +17,10 @@ public class TransactionServiceTest extends AbstractTU {
 	@Autowired
 	private TransactionService service;
 	
-	TransactionData td1;
+	private TransactionData td1;
 	
 	@Before
 	public void setUp() {
-		// TODO incluir mockMVC
-		String TRANSACTION_1 = "{ " +
-				"\"user_cpf\": \"11111111111\"," +
-				"\"merchant_id\": 1," +
-				"\"transaction_value\": 01.00," +
-				"\"transaction_type\": \"TP_2\"" +
-				"}";
 		td1 = new TransactionData("11111111111", 1, 1.0d, "TP_2");
 	}
 

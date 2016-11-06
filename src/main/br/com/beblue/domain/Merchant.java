@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Merchant {
@@ -17,11 +18,11 @@ public class Merchant {
 	
 	private String name;
 	
-	private HashMap<DayOfWeek, Double> cashbacks;
+	@Transient
+	private HashMap<DayOfWeek, Double> cashbacks = new HashMap<>();
 	
 	public Merchant(String name) {
 		this.name = name;
-		cashbacks = new HashMap<>();
 	}
 
 	public int getId() {
@@ -51,6 +52,8 @@ public class Merchant {
 	public Merchant() {}
 
 	public Double getCashBackFromString(String dayOfWeek) {
+		if (cashbacks.isEmpty())
+			return 0d;
 		return getCashbacks().get(DayOfWeek.valueOf(dayOfWeek.toUpperCase()));
 	}
 

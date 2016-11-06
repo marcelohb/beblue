@@ -1,6 +1,9 @@
 package br.com.beblue.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import javax.persistence.Embedded;
@@ -96,6 +99,11 @@ public class Transaction {
 	
 	public Date getDate() {
 		return date;
+	}
+	
+	public String getDayOfWeek() {
+		DateFormat sdf = new SimpleDateFormat("EEEE",Locale.US);
+		return sdf.format(date).toUpperCase();
 	}
 	
 	public void setDate(Date date) {

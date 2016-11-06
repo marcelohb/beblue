@@ -56,11 +56,11 @@ public class User {
 		this.balance = balance;
 	}
 
-	public void sacar(Double value) {
-		balance -= value;
+	public void sacar(Double valor) {
+		balance -= valor;
 		if (balance < 0d) {
 			balance = Double.valueOf(0.0);
-			throw new IllegalArgumentException("SALDO INSUFICIENTE");
+//			throw new IllegalArgumentException("SALDO INSUFICIENTE");
 		}
 	}
 
@@ -93,6 +93,12 @@ public class User {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return "User : { user_cpf : " + this.userCpf +
+				",name : " + this.name +
+				",balance : " + this.balance + "} " ;
+	}
 	protected User() {}
 
 }

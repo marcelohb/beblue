@@ -30,6 +30,7 @@ public class MerchantTest {
 		cashbacks.put(DayOfWeek.THURSDAY, 25d);
 		cashbacks.put(DayOfWeek.FRIDAY, 30d);
 		cashbacks.put(DayOfWeek.SATURDAY, 35d);
+		m.setCashbacks(cashbacks);
 	}
 
 	@Test
@@ -134,6 +135,12 @@ public class MerchantTest {
 		}
 		Double d = cashbacks.get(DayOfWeek.valueOf(sdf.format(sunday).toUpperCase()));
 		assertEquals(Double.valueOf(5.0), d);
+	}
+	
+	@Test
+	public void cashbackFromString() {
+		Double sunday = m.getCashBackFromString("SUNDAY");
+		assertEquals(Double.valueOf(5.0), sunday);
 	}
 
 }

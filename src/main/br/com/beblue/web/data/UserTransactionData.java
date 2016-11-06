@@ -1,25 +1,27 @@
 package br.com.beblue.web.data;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import br.com.beblue.domain.Transaction;
-import br.com.beblue.domain.TransactionType;
 import br.com.beblue.domain.User;
 
 public class UserTransactionData {
 	
 	private String transaction_code;
 	private String user_cpf;
+	private String user_name;
 	private Double user_balance;
-	private Date transaction_date;
-	private TransactionType transaction_type;
+	private String transaction_date;
+	private String transaction_type;
 	
 	public UserTransactionData(Transaction t, User u) {
 		this.transaction_code = t.getTransactionId().toString();
 		this.user_cpf = u.getUser_cpf();
+		this.user_name = u.getName();
 		this.user_balance = u.getBalance();
-		this.transaction_date = t.getDate();
-		this.transaction_type = t.getType();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		this.transaction_date = sdf.format(t.getDate());
+		this.transaction_type = t.getType().getTransaction_type();
 	}
 
 	public String getTransaction_code() {
@@ -37,6 +39,14 @@ public class UserTransactionData {
 	public void setUser_cpf(String user_cpf) {
 		this.user_cpf = user_cpf;
 	}
+	
+	public String getUser_name() {
+		return user_name;
+	}
+	
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 
 	public Double getUser_balance() {
 		return user_balance;
@@ -46,19 +56,19 @@ public class UserTransactionData {
 		this.user_balance = user_balance;
 	}
 
-	public Date getTransaction_date() {
+	public String getTransaction_date() {
 		return transaction_date;
 	}
 
-	public void setTransaction_date(Date transaction_date) {
+	public void setTransaction_date(String transaction_date) {
 		this.transaction_date = transaction_date;
 	}
 
-	public TransactionType getTransaction_type() {
+	public String getTransaction_type() {
 		return transaction_type;
 	}
 
-	public void setTransaction_type(TransactionType transaction_type) {
+	public void setTransaction_type(String transaction_type) {
 		this.transaction_type = transaction_type;
 	}
 

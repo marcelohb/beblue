@@ -18,4 +18,9 @@ public class TransactionId {
 	}
 	
 	public TransactionId() {}
+	
+	@Override
+	public String toString() {
+		return idTransaction.toString();
+	}
 }
